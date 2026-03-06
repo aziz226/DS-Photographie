@@ -57,34 +57,41 @@ class _HeroSectionState extends State<HeroSection>
       width: double.infinity,
       child: Stack(
         children: [
-          // Animated background
+          // Background photo
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/hero_bg.jpg',
+              fit: BoxFit.cover,
+              alignment: Alignment.center,
+            ),
+          ),
+          // Animated gradient overlay on top of the photo
           AnimatedBuilder(
             animation: _bgController,
             builder: (context, child) {
               return Container(
                 decoration: BoxDecoration(
-                  gradient: RadialGradient(
-                    center: Alignment(
-                      -0.6 + _bgController.value * 0.4,
-                      -0.2 + _bgController.value * 0.3,
-                    ),
-                    radius: 1.2,
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
                     colors: [
-                      AppColors.bordeaux.withValues(alpha: 0.6),
-                      AppColors.bg,
+                      AppColors.bg.withValues(alpha: 0.45),
+                      AppColors.bg.withValues(alpha: 0.3 + _bgController.value * 0.1),
+                      AppColors.bg.withValues(alpha: 0.7),
                     ],
+                    stops: const [0.0, 0.5, 1.0],
                   ),
                 ),
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: RadialGradient(
                       center: Alignment(
-                        0.5 - _bgController.value * 0.3,
-                        0.3 - _bgController.value * 0.2,
+                        -0.4 + _bgController.value * 0.3,
+                        0.1 - _bgController.value * 0.2,
                       ),
-                      radius: 0.8,
+                      radius: 1.2,
                       colors: [
-                        AppColors.gold.withValues(alpha: 0.08 + _bgController.value * 0.06),
+                        AppColors.gold.withValues(alpha: 0.06 + _bgController.value * 0.04),
                         Colors.transparent,
                       ],
                     ),
